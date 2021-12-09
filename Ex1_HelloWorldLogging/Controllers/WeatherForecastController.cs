@@ -31,40 +31,40 @@ namespace Ex1_HelloWorldLogging.Controllers
             _logger.LogInformation("Hello logger!");
 
             // log warn level
-            //_logger.LogWarning("Hello logger warning!");
+            _logger.LogWarning("Hello logger warning!");
 
             // log err level
-            //_logger.LogError("Hello logger error!");
+            _logger.LogError("Hello logger error!");
 
             // log ftl level
-            //_logger.LogCritical("Hello logger FATAL / CRITICAL!!!");
+            _logger.LogCritical("Hello logger FATAL / CRITICAL!!!");
 
-            // log err level + excp
-            //try
-            //{
-            //    throw new Exception("Whoopsie daisy! Something went wrong...");
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, "Hello logger error!");
-            //}
+            //log err level + excp
+            try
+            {
+                throw new Exception("Whoopsie daisy! Something went wrong...");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Hello logger error!");
+            }
 
-            // DO NOT DO THIS: log string interpolated
-            //_logger.LogInformation($"Hello {name}! (string interpolated)", name);
+           // DO NOT DO THIS: log string interpolated
+            _logger.LogInformation($"Hello {name}! (string interpolated)", name);
 
             // BUT DO THIS: log interpolated values to save parts as structured logging properties
-            //_logger.LogInformation("Hello {author}! (log property interpolated)", name);
+            _logger.LogInformation("Hello {author}! (log property interpolated)", name);
 
             // use event ID to find quicker in windows event log, make sure you export to windows EventLog with EventLog log provider registration - windows only!
             //_logger.LogInformation(123, "Hello {author}!", name);
 
             // create use custom event IDs with title
-            //var e = new EventId(5555, "Some event");
-            //_logger.LogWarning(e, "Whoops some warning occured at (UTC+0): {timestamp}", DateTime.UtcNow);
+            var e = new EventId(5555, "Some event");
+            _logger.LogWarning(e, "Whoops some warning occured at (UTC+0): {timestamp}", DateTime.UtcNow);
 
             // enrich the log with contextual data
-            //using var logscope = _logger.BeginScope("this is a scope with user '{user}' and role '{role}'", "user 123", "finance");
-            //_logger.LogInformation("This is prop enriched message from log context");
+            using var logscope = _logger.BeginScope("this is a scope with user '{user}' and role '{role}'", "user 123", "finance");
+            _logger.LogInformation("This is prop enriched message from log context");
 
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

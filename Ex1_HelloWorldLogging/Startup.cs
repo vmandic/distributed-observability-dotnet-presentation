@@ -26,7 +26,7 @@ namespace Ex1_HelloWorldLogging
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // this will log HTTP traffic, useful but maybe too verbose, but still good!
-            //app.UseSerilogRequestLogging();
+            app.UseSerilogRequestLogging();
 
             if (env.IsDevelopment())
             {

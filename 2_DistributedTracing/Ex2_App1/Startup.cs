@@ -47,7 +47,7 @@ namespace Ex2_App1
 
                 if (_hostEnv.IsDevelopment())
                 {
-                    builder.AddConsoleExporter(options => options.Targets = ConsoleExporterOutputTargets.Debug);
+                    builder.AddConsoleExporter(options => options.Targets = ConsoleExporterOutputTargets.Console);
                 }
 
                 // ref: https://www.jaegertracing.io/docs/1.29/getting-started/
@@ -64,7 +64,7 @@ namespace Ex2_App1
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseRouting();
 
             app.UseAuthorization();
